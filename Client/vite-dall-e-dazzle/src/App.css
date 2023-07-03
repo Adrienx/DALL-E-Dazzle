@@ -10,3 +10,6 @@
   width: 350px;
 }
 
+li {
+  list-style: none;
+}

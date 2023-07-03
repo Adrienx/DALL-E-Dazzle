@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "cloudinary": "^1.37.3"
+    "axios": "^1.4.0",
+    "cloudinary": "^1.37.3",
+    "deepai": "^1.0.21"
   }
 }
