@@ -1,10 +1,20 @@
 import DataContext from "../DataContext"
 import { useContext, useState } from "react"
 import axios from "axios"
+import { inspirationPrompts } from "../data/inspirationPrompts"
 
 export default function CreatePrompt() {
   const { prompt, setPrompt, result, setResult } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
+
+  // Function that randomly selects a prompt from the imported inspirationPrompts array.
+
+  const inspireMe = () => {
+    const randomPrompt =
+      inspirationPrompts[Math.floor(Math.random() * inspirationPrompts.length)]
+    setPrompt(randomPrompt)
+  }
+  // Function that handles the generation of AI Image
 
   const generateImage = async () => {
     try {
@@ -12,7 +22,7 @@ export default function CreatePrompt() {
       const res = await axios.get(
         `http://localhost:3001/api/generateImage?prompt=${prompt}`
       )
-      console.log(res.data.imageUrl)
+      // console.log(res.data.imageUrl)
       setResult(res.data.imageUrl)
     } catch (error) {
       console.log(error)
@@ -26,31 +36,34 @@ export default function CreatePrompt() {
     return <div>Loading...</div>
   }
 
+  // Handles the display of textarea, 3 buttons (Generate Image, Regenerate Image, Inspire Me), and the generated image itself.
   return (
     <div className="card">
       <h2>Enter prompt to generate an image</h2>
-
       <textarea
         className="app-input"
-        placeholder="Search An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
+        placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
         onChange={(e) => setPrompt(e.target.value)}
+        value={prompt} // inserts inspireMe prompt into textarea, the is the "prompt" state defined over in the App.jsx file.
         rows="5"
         cols="50"
       />
-      <div className="button">
-        <button onClick={generateImage}>Generate an Image</button>
+      <div>
+        <div className="button">
+          <button onClick={generateImage}>Generate an Image</button>
+          <button onClick={inspireMe}>Inspire Me!</button>
+        </div>
       </div>
-      {/* If the 'result' state contains an image URL, an image element is displayed with the source set to the URL and a 'Regenerate Image' button is shown. If there's no 'result', nothing extra is displayed. */}
+      {/* Ternary operator that says if the 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
       {result ? (
         <>
           <img className="result-image" src={result} alt="result" />
           <div className="button">
-            {/* The 'Regenerate Image' button also calls the 'generateImage' function when clicked, allowing the user to generate a new image with the same prompt. */}
             <button onClick={generateImage}>Regenerate Image</button>
           </div>
         </>
       ) : (
-        <></> // Empty fragment, displays nothing if 'result' is null or empty.
+        <></>
       )}
     </div>
   )
