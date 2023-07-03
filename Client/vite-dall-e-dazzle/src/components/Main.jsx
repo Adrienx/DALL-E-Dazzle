@@ -10,7 +10,7 @@ const Main = () => {
     <div className="routes-container">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/CreatePrompt" element={<CreateImage />} />
+        <Route path="/CreateImage" element={<CreateImage />} />
         <Route path="/ImageGallery" element={<ImageGallery />} />
         <Route path="/UserProfile" element={<UserProfile />} />
         <Route path="/UserLogin" element={<UserLogin />} />
