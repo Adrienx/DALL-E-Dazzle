@@ -20,7 +20,7 @@ const getGalleryImageById = async (req, res) => {
     }
 }
 
-// NOT WORKING:
+// WORKING:
 const createGalleryImage = async (req, res) => {
     try {
         const newImage = await new GalleryImage(req.body)

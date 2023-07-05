@@ -10,6 +10,7 @@ const controller = require('../controllers/galleryImageController')
 
 Router.get('/gallery/:id', controller.getGalleryImageById)
 Router.get('/gallery', controller.getGalleryImages)
+Router.post('/gallery', controller.createGalleryImage)
 Router.delete('/delete/:id', controller.deleteGalleryImage)
 
 module.exports = Router

@@ -9,6 +9,8 @@ const db = require('./db')
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
 
 app.use('/api', galleryImagesRouter)
 
