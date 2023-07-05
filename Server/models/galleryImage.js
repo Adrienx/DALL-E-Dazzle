@@ -1,8 +1,9 @@
 const { Schema } = require('mongoose')
 const galleryImageSchema = new Schema(
     {
-        imageURL: { type: String, required: true },
-        prompt: { type: String }
+        imageUrl: { type: String, required: true },
+        prompt: { type: String },
+        favorite: { type: Boolean }
     },
     { timestamps: true }
 )
