@@ -8,7 +8,8 @@ const controller = require('../controllers/galleryImageController')
 //   const cld = new Cloudinary({cloud: {cloudName: 'dall-e-dazzle'}})
 // }
 
-Router.get('/api/gallery', controller.getGalleryImages)
-Router.get('/api/gallery/:id', controller.getGalleryImageById)
+Router.get('/gallery/:id', controller.getGalleryImageById)
+Router.get('/gallery', controller.getGalleryImages)
+Router.delete('/delete/:id', controller.deleteGalleryImage)
 
 module.exports = Router

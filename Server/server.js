@@ -1,16 +1,16 @@
 const express = require("express")
 const cors = require("cors")
-// const { GalleryImage } = require('./models')
-const { Configuration, OpenAIApi } = require("openai")
-require("dotenv").config()
-const PORT = process.env.PORT || 3001
-const db = require('./db')
 const app = express()
+const PORT = process.env.PORT || 3001
+const { Configuration, OpenAIApi } = require("openai")
+const galleryImagesRouter = require('./routes/galleryImagesRouter.js')
+require("dotenv").config()
+const db = require('./db')
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 
-const controller = require('./controllers/galleryImageController')
-
-app.use('/api/gallery', controller.getGalleryImages)
+app.use('/api', galleryImagesRouter)
 
 //Set up api route for generating image. This route will be used by the "generateImage" function in the CreatePrompt component.
 app.get("/api/generateImage", async (req, res) => {
