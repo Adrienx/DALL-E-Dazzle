@@ -1,9 +1,18 @@
 const express = require("express")
 const cors = require("cors")
-const { Configuration, OpenAIApi } = require("openai")
-require("dotenv").config()
 const app = express()
+const PORT = process.env.PORT || 3001
+const { Configuration, OpenAIApi } = require("openai")
+const galleryImagesRouter = require('./routes/galleryImagesRouter.js')
+require("dotenv").config()
+const db = require('./db')
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+const bodyParser = require('body-parser');
+app.use(bodyParser.json())
+
+app.use('/api', galleryImagesRouter)
 
 //Set up api route for generating image. This route will be used by the "generateImage" function in the CreatePrompt component.
 app.get("/api/generateImage", async (req, res) => {
@@ -36,6 +45,6 @@ app.get("/api/generateImage", async (req, res) => {
   }
 })
 
-app.listen(3001, () =>
-  console.log("Express server is running on localhost:3001")
+app.listen(PORT, () =>
+  console.log(`Express server is running on port ${PORT}`)
 )
