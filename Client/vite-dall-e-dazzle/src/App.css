@@ -15,3 +15,8 @@
   display: flex;
   justify-content: left;
 }
+
+li {
+  list-style: none;
+}
+

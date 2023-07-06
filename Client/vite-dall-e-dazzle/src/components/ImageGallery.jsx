@@ -1,8 +1,8 @@
+import React, { useState, useContext } from "react"
 import DataContext from "../DataContext"
-import React, { useContext } from "react"
 
 export default function ImageGallery() {
-  //   const { userInfo, setUserInfo } = useContext(DataContext)
+  const { allPosts, setAllPosts } = useState(null)
   return (
     <div className="card">
       <h2> Gallery Page</h2>

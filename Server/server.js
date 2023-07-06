@@ -6,6 +6,7 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3001
 const AppRouter = require("./routes/AppRouter.js")
 const { Configuration, OpenAIApi } = require("openai")
+const galleryImagesRouter = require('./routes/galleryImagesRouter.js')
 
 ///////////////////////////////////////////////////////////////////
 //Server Set up
@@ -21,6 +22,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use('/api', galleryImagesRouter)
 
 ///////////////////////////////////////////////////////////////////
 // Routes
@@ -32,7 +36,7 @@ app.get("/", (req, res) => {
   res.send("Landing page")
 })
 
-//Gnerate Image Route (So that calls to OpenAI api are made form server and not the client)
+//Generate Image Route (So that calls to OpenAI api are made form server and not the client)
 
 //This route will be used by the "generateImage" function in the CreatePrompt component.
 app.get("/api/generateImage", async (req, res) => {
@@ -66,3 +70,4 @@ app.get("/api/generateImage", async (req, res) => {
 })
 
 ///////////////////////////////////////////////////////////////////
+
