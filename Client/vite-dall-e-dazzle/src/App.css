@@ -6,7 +6,12 @@
 }
 
 .result-image {
-  margin-top: 20px;
-  width: 350px;
+  margin-top: 30px;
+  width: 500px;
 }
 
+.manage-prompts {
+  border: solid 5px;
+  display: flex;
+  justify-content: left;
+}
