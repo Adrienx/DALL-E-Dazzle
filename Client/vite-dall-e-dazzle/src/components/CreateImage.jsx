@@ -2,8 +2,9 @@ import DataContext from "../DataContext"
 import { useContext, useState } from "react"
 import axios from "axios"
 import { inspirationPrompts } from "../data/inspirationPrompts"
+import CreatePrompt from "./CreatePrompt"
 
-export default function CreatePrompt() {
+export default function CreateImage() {
   const { prompt, setPrompt, result, setResult } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
 
@@ -65,6 +66,7 @@ export default function CreatePrompt() {
       ) : (
         <></>
       )}
+      <CreatePrompt />
     </div>
   )
 }
