@@ -67,6 +67,12 @@ const seedDB = async () => {
 
     // save new prompt to db, then rinse an repeat for each prompt in array
     await newPrompt.save()
+
+    // add this prompt to the prompts array of the category
+    category.prompts.push(newPrompt._id)
+
+    // save the category
+    await category.save()
   }
 }
 
