@@ -16,13 +16,24 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 
 ///////////////////////////////////////////////////////////////////
 
+// Cloudinary config setup
+const cld = new Cloudinary({
+  cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
+  apiKey: process.env.VITE_CLOUDINARY_API_KEY,
+  apiSecret: process.env.VITE_CLOUDINARY_API_SECRET,
+  url: {
+    secure: true
+  }
+})
+const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cld.cloudName}/image/upload`
+
+///////////////////////////////////////////////////////////////////
+
 // Middleware
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
 
 ///////////////////////////////////////////////////////////////////
 // Routes

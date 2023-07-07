@@ -1,10 +1,11 @@
-const { Schema } = require('mongoose')
-const galleryImageSchema = new Schema(
+const mongoose = require("mongoose")
+
+const galleryImageSchema = new mongoose.Schema(
     {
-        imageUrl: { type: String, required: true },
-        prompt: { type: String },
-        favorite: { type: Boolean }
+        image: { type: String, required: true },
+        prompt: { type: mongoose.Schema.Types.ObjectId, ref: "Prompt" },
+        // favorite: { type: Boolean }
     },
     { timestamps: true }
 )
-module.exports = galleryImageSchema
+module.exports = mongoose.model('GalleryImage', galleryImageSchema)
