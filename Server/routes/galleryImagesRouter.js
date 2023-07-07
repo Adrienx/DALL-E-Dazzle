@@ -1,6 +1,6 @@
-const express = require('express')
-const Router = express.Router()
-const controller = require('../controllers/galleryImageController')
+const express = require("express")
+const router = express.Router()
+const imageController = require("../controllers/galleryImageController")
 
 // from Cloudinary implementation instructions:
 // import { Cloudinary } from "@cloudinary/url-gen"
@@ -8,9 +8,10 @@ const controller = require('../controllers/galleryImageController')
 //   const cld = new Cloudinary({cloud: {cloudName: 'dall-e-dazzle'}})
 // }
 
-Router.get('/gallery/:id', controller.getGalleryImageById)
-Router.get('/gallery', controller.getGalleryImages)
-Router.post('/gallery', controller.createGalleryImage)
-Router.delete('/delete/:id', controller.deleteGalleryImage)
+router.get("/", imageController.index)
+router.get("/gallery/:id", imageController.getGalleryImageById)
+router.get("/gallery", imageController.getGalleryImages)
+router.post("/gallery", imageController.createGalleryImage)
+router.delete("/delete/:id", imageController.deleteGalleryImage)
 
-module.exports = Router
+module.exports = router

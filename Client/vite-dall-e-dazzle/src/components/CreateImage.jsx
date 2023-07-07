@@ -2,11 +2,17 @@ import DataContext from "../DataContext"
 import { useContext, useState } from "react"
 import axios from "axios"
 import { inspirationPrompts } from "../data/inspirationPrompts"
+import CreatePrompt from "./CreatePrompt"
+import SearchPrompt from "./SearchPrompt"
+import UpdatePrompt from "./UpdatePrompt"
+import DeletePrompt from "./DeletePrompt"
 
-export default function CreatePrompt() {
+////////////////////////////////////////////////////////////////////////////////////////////
+export default function CreateImage() {
   const { prompt, setPrompt, result, setResult } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
 
+  ////////////////////////////////////////////////////////////////////////////////////////////
   // Function that randomly selects a prompt from the imported inspirationPrompts array.
 
   const inspireMe = () => {
@@ -14,6 +20,8 @@ export default function CreatePrompt() {
       inspirationPrompts[Math.floor(Math.random() * inspirationPrompts.length)]
     setPrompt(randomPrompt)
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
   // Function that handles the generation of AI Image
 
   const generateImage = async () => {
@@ -31,12 +39,16 @@ export default function CreatePrompt() {
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////
   // Show "Loading..." text while fetching image
+
   if (loading) {
     return <div>Loading...</div>
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////
   // Handles the display of textarea, 3 buttons (Generate Image, Regenerate Image, Inspire Me), and the generated image itself.
+
   return (
     <div className="card">
       <h2>Enter prompt to generate an image</h2>
@@ -54,7 +66,7 @@ export default function CreatePrompt() {
           <button onClick={inspireMe}>Inspire Me!</button>
         </div>
       </div>
-      {/* Ternary operator that says if the 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
+      {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
       {result ? (
         <>
           <img className="result-image" src={result} alt="result" />
@@ -65,6 +77,10 @@ export default function CreatePrompt() {
       ) : (
         <></>
       )}
+      <CreatePrompt />
+      <SearchPrompt />
+      <UpdatePrompt />
+      <DeletePrompt />
     </div>
   )
 }
