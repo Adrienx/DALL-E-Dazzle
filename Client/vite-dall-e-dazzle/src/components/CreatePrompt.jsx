@@ -1,208 +1,156 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
+import { useForm } from "react-hook-form" //https://react-hook-form.com/docs/useform
 
-const CreatePrompt = () => {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+////////////////////////////////////////////////////////////////////////////////////////////
+
+const CreatePromptModal = () => {
+  const { register, handleSubmit, watch } = useForm() //  useForm hook allows the use of "register" (used to register input fields with the form), "handleSubmit" (provides form validation for onSubmit) and "watch" to observe a value and trigger a specific response depending on its state.
   const [categories, setCategories] = useState([])
-  const [selectedCategoryId, setSelectedCategoryId] = useState("")
-  const [newCategory, setNewCategory] = useState("")
-  const [prompts, setPrompts] = useState([])
-  const [categoryType, setCategoryType] = useState("existing")
+  const [modalOpen, setModalOpen] = useState(false)
+  const categoryType = watch("categoryType", "existing") //  "existing" is the default value so when the form first renders and the "categoryType" input field doesn't have a value yet, categoryType will be "existing".
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Populate categories
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3001/api/promptCategories"
-        )
-        setCategories(response.data)
-      } catch (error) {
-        console.error("Error:", error)
-      }
+  ////////////////////////////////////////////////////////////////////////////////////////////
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/api/promptCategories"
+      )
+      setCategories(response.data)
+    } catch (error) {
+      console.error("Error:", error)
     }
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////
+  // useEffect to fetch the categories once at component load time for the dropdown list
+
+  useEffect(() => {
     fetchCategories()
   }, [])
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////
 
-  const handleCreatePrompt = async (event) => {
-    event.preventDefault()
-
-    // Validate inputs
-    if (
-      !title ||
-      !description ||
-      (categoryType === "existing" && !selectedCategoryId) ||
-      (categoryType === "new" && !newCategory)
-    ) {
-      console.log("Please fill all the required fields.")
-      console.log(`Selected Category ID: ${selectedCategoryId}`)
-      console.log(`New Category: ${newCategory}`)
-      return
-    }
-
-    let promptCategory = categoryType === "existing" ? selectedCategoryId : ""
-
-    // If the new category option is checked and newCategory is not empty, create a new category
-    if (categoryType === "new" && newCategory) {
+  const onSubmit = async (data) => {
+    let categoryId = data.category
+    if (data.categoryType === "new") {
       try {
-        const response = await axios.post(
+        const categoryResponse = await axios.post(
           "http://localhost:3001/api/promptCategories",
-          { name: newCategory }
+          { name: data.newCategory }
         )
-
-        // Set promptCategory to the id of the new category
-        promptCategory = response.data._id
-
-        setNewCategory("") // Clear new category field
-        setCategories([...categories, response.data]) // Append new category to list
+        categoryId = categoryResponse.data._id
       } catch (error) {
         console.error("Error:", error)
       }
     }
 
-    // Actually Create the new prompt
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
     try {
-      const response = await axios.post("http://localhost:3001/api/prompts", {
-        title,
-        description,
-        category: promptCategory,
+      await axios.post("http://localhost:3001/api/prompts", {
+        title: data.title,
+        description: data.description,
+        category: categoryId,
       })
-
-      setTitle("") // Reset the title field
-      setDescription("") // Reset the description field
-      setSelectedCategoryId("") // Reset the category selection field
-
-      const newPrompt = response.data
-
-      setPrompts([...prompts, newPrompt]) // Append new prompt to list
-
-      // Update category in state
-      if (categoryType === "existing") {
-        setCategories(
-          categories.map((category) =>
-            category._id === promptCategory
-              ? { ...category, prompts: [...category.prompts, newPrompt] }
-              : category
-          )
-        )
-      }
-
-      console.log("Prompt created:", newPrompt)
+      alert("Prompt created successfully.")
+      setModalOpen(false)
     } catch (error) {
       console.error("Error:", error)
     }
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleSearchPrompts = async (event) => {
-    event.preventDefault()
-    if (selectedCategoryId) {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/api/prompts/category/${selectedCategoryId}`
-        )
-        setPrompts(response.data)
-      } catch (error) {
-        console.error("Error:", error)
-      }
-    }
-  }
+  ////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
-      {/* Creation form */}
-      <form onSubmit={handleCreatePrompt}>
-        <label>Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+      <button onClick={() => setModalOpen(true)}>
+        Open Create New Prompt Modal
+      </button>
+      {modalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <span
+              onClick={() => setModalOpen(false)}
+              title="Close Modal"
+              className="close"
+            >
+              &times;
+            </span>
 
-        <label>Description:</label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
+            {/* /////////////////////////////////////////////////////////////////// */}
+            {/* // Form that handles the subission for new prompt creation */}
 
-        <label>
-          <input
-            type="radio"
-            value="existing"
-            checked={categoryType === "existing"}
-            onChange={(e) => setCategoryType(e.target.value)}
-          />
-          Select existing category
-        </label>
-        {categoryType === "existing" && (
-          <select
-            value={selectedCategoryId}
-            onChange={(e) => setSelectedCategoryId(e.target.value)}
-            required
-          >
-            <option value="">Choose a Category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        )}
-
-        <label>
-          <input
-            type="radio"
-            value="new"
-            checked={categoryType === "new"}
-            onChange={(e) => setCategoryType(e.target.value)}
-          />
-          Create new category
-        </label>
-        {categoryType === "new" && (
-          <input
-            type="text"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
-          />
-        )}
-
-        <button type="submit">Create Prompt</button>
-      </form>
-
-      {/* Search form */}
-      <form onSubmit={handleSearchPrompts}>
-        <label>Choose Category:</label>
-        <select
-          value={selectedCategoryId}
-          onChange={(e) => setSelectedCategoryId(e.target.value)}
-          required
-        >
-          {categories.map((category) => (
-            <option key={category._id} value={category._id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-
-        <button type="submit">Search Prompts</button>
-      </form>
-
-      {/* Display results */}
-      {prompts.map((prompt) => (
-        <div key={prompt._id}>
-          <h2>{prompt.title}</h2>
-          <p>{prompt.description}</p>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                {...register("title", { required: true })}
+                id="title"
+                name="title"
+              />
+              <label htmlFor="description">Description:</label>
+              <textarea
+                {...register("description", { required: true })}
+                id="description"
+                name="description"
+              />
+              {/* /////////////////////////////////////////////////////////////////// */}
+              {/* // Create prompt using existing category */}
+              <input
+                type="radio"
+                value="existing"
+                {...register("categoryType")}
+                id="categoryTypeExisting"
+              />
+              <label htmlFor="categoryTypeExisting">
+                Use existing category
+              </label>
+              {categoryType === "existing" && (
+                <select
+                  id="categorySelect"
+                  name="category"
+                  {...register("category", { required: true })}
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+              {/* /////////////////////////////////////////////////////////////////// */}
+              {/* // Create prompt using new category */}
+              <input
+                type="radio"
+                value="new"
+                {...register("categoryType")}
+                id="categoryTypeNew"
+              />
+              <label htmlFor="categoryTypeNew">Create new category</label>
+              {categoryType === "new" && (
+                <input
+                  type="text"
+                  {...register("newCategory", { required: true })}
+                  id="newCategory"
+                  name="newCategory"
+                />
+              )}
+              {/* /////////////////////////////////////////////////////////////////// */}
+              {/* // Create and Cancel buttons */}
+              <button type="submit">
+                <i className="fa-solid fa-floppy-disk fa-xl">Create</i>
+              </button>
+              <button onClick={() => setModalOpen(false)} type="button">
+                <i className="fa-solid fa-xmark fa-xl">Cancel</i>
+              </button>
+            </form>
+          </div>
         </div>
-      ))}
+      )}
     </>
   )
 }
 
-export default CreatePrompt
+export default CreatePromptModal

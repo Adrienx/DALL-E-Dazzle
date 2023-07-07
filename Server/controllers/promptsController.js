@@ -19,16 +19,24 @@ exports.create = async (req, res) => {
       description,
       category,
     })
-    await newPrompt.save()
 
-    // Add the new prompt's ID to the user's and category's 'prompts' array
-    // await User.findByIdAndUpdate(user, { $push: { prompts: newPrompt._id } })
-    await PromptCategory.findByIdAndUpdate(category, {
-      $push: { prompts: newPrompt._id },
-    })
+    await newPrompt.save()
+    console.log("New prompt created: ", newPrompt)
+
+    // The ID of the newly created prompt is added to the 'prompts' array of the selected category.
+    const updatedCategory = await PromptCategory.findByIdAndUpdate(
+      category,
+      {
+        $push: { prompts: newPrompt._id },
+      },
+      { new: true } //returns the updated document, which includes the newly added prompt ID.
+    )
+
+    console.log("Updated category: ", updatedCategory)
 
     res.status(201).json(newPrompt)
   } catch (error) {
+    console.log("Error occurred: ", error.message)
     res.status(500).json({ error: error.message })
   }
 }
@@ -46,7 +54,7 @@ exports.update = async (req, res) => {
   try {
     const prompt = await Prompt.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-    })
+    }) //returns the updated document,
     res.json(prompt)
   } catch (error) {
     res.status(500).json({ message: error.message })
