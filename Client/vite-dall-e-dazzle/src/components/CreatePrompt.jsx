@@ -140,10 +140,10 @@ const CreatePromptModal = () => {
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create and Cancel buttons */}
               <button type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl">Create</i>
+                <i className="fa-solid fa-floppy-disk fa-xl"></i>
               </button>
               <button onClick={() => setModalOpen(false)} type="button">
-                <i className="fa-solid fa-xmark fa-xl">Cancel</i>
+                <i className="fa-solid fa-xmark fa-xl"></i>
               </button>
             </form>
           </div>

@@ -68,9 +68,14 @@ const UpdatePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
+      <button
+        onClick={() => setModalOpen(true)}
+        disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
+        title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
+      >
         Open Update Existing Prompt Modal
       </button>
+
       {modalOpen && (
         <div className="modal">
           <div className="modal-content">

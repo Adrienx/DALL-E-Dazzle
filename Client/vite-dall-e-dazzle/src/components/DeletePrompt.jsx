@@ -71,7 +71,11 @@ const DeletePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
+      <button
+        onClick={() => setModalOpen(true)}
+        disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
+        title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
+      >
         Open Delete Prompts Modal
       </button>
       {modalOpen && (
@@ -104,7 +108,7 @@ const DeletePromptModal = () => {
                   </option>
                 ))}
               </select>
-              <button type="submit">Search Prompts</button>
+              <button type="submit">Delete Category</button>
             </form>
             {/* /////////////////////////////////////////////////////////////////// */}
             <h5>(Click on prompt to delete)</h5>
