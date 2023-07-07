@@ -6,6 +6,7 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3001
 const AppRouter = require("./routes/AppRouter.js")
 const { Configuration, OpenAIApi } = require("openai")
+// const cloudinary = require('cloudinary').v2
 
 ///////////////////////////////////////////////////////////////////
 //Server Set up
@@ -17,15 +18,15 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 ///////////////////////////////////////////////////////////////////
 
 // Cloudinary config setup
-const cld = new Cloudinary({
-  cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
-  apiKey: process.env.VITE_CLOUDINARY_API_KEY,
-  apiSecret: process.env.VITE_CLOUDINARY_API_SECRET,
-  url: {
-    secure: true
-  }
-})
-const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cld.cloudName}/image/upload`
+// cloudinary.config({
+//   cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
+//   apiKey: process.env.VITE_CLOUDINARY_API_KEY,
+//   apiSecret: process.env.VITE_CLOUDINARY_API_SECRET,
+//   url: {
+//     secure: true
+//   }
+// })
+// const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
 
 ///////////////////////////////////////////////////////////////////
 

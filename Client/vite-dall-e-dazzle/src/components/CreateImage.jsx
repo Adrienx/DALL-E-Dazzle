@@ -50,7 +50,7 @@ export default function CreateImage() {
 
   const imageToCloudinary = async () => {
     Cloudinary.v2.uploader
-      .unsigned_upload(`${result}`, `${cld.cloudName}`)
+      .unsigned_upload(`${result}`, `${cloudName}`)
       .then(result => console.log(result))
   }
 

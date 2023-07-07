@@ -3,7 +3,6 @@ import Header from "./components/Header"
 import Main from "./components/Main"
 import DataContext from "./DataContext"
 import "./App.css"
-require("dotenv").config()
 
 function App() {
   const [prompt, setPrompt] = useState("") //state to store user entered prompt

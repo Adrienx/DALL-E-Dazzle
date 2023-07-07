@@ -2,14 +2,17 @@ const express = require("express")
 const router = express.Router()
 const imageController = require("../controllers/galleryImageController")
 require("dotenv").config()
-// const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary').v2
 
 // from Cloudinary implementation instructions:
-// cloudinary.config({
-//     cloud_name: process.env.VITE_CLOUDINARY_CLOUD_NAME,
-//     api_key: process.env.VITE_CLOUDINARY_API_KEY,
-//     api_secret: process.env.VITE_CLOUDINARY_API_SECRET
-// })
+cloudinary.config({
+    cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
+    apiKey: process.env.VITE_CLOUDINARY_API_KEY,
+    apiSecret: process.env.VITE_CLOUDINARY_API_SECRET,
+    url: {
+      secure: true
+    }
+})
 
 router.get("/", imageController.index)
 router.get("/gallery/:id", imageController.getGalleryImageById)
