@@ -6,6 +6,7 @@ import CreatePrompt from "./CreatePrompt"
 import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
+import DeleteCategory from "./DeleteCategory"
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 export default function CreateImage() {
@@ -81,6 +82,7 @@ export default function CreateImage() {
       <SearchPrompt />
       <UpdatePrompt />
       <DeletePrompt />
+      <DeleteCategory />
     </div>
   )
 }

@@ -47,7 +47,11 @@ const SearchPromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
+      <button
+        onClick={() => setModalOpen(true)}
+        disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
+        title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
+      >
         Open Search Prompts Modal
       </button>
       {modalOpen && (
