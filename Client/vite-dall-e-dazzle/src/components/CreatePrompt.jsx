@@ -70,7 +70,7 @@ const CreatePromptModal = () => {
       {modalOpen && (
         <div className="modal-container">
           <div className="modal-content-container">
-            <div>
+            <div className="close-modal">
               <span
                 onClick={() => setModalOpen(false)}
                 title="Close Modal"
@@ -97,15 +97,17 @@ const CreatePromptModal = () => {
               />
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using existing category */}
-              <input
-                type="radio"
-                value="existing"
-                {...register("categoryType")}
-                id="categoryTypeExisting"
-              />
-              <label htmlFor="categoryTypeExisting">
-                Use existing category:
-              </label>
+              <div className="flex-label-existing">
+                <input
+                  type="radio"
+                  value="existing"
+                  {...register("categoryType")}
+                  id="categoryTypeExisting"
+                />
+                <label htmlFor="categoryTypeExisting">
+                  Use existing category:
+                </label>
+              </div>
               {categoryType === "existing" && (
                 <select
                   id="categorySelect"
@@ -122,13 +124,15 @@ const CreatePromptModal = () => {
               )}
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using new category */}
-              <input
-                type="radio"
-                value="new"
-                {...register("categoryType")}
-                id="categoryTypeNew"
-              />
-              <label htmlFor="categoryTypeNew">Create new category: </label>
+              <div className="flex-label-new">
+                <input
+                  type="radio"
+                  value="new"
+                  {...register("categoryType")}
+                  id="categoryTypeNew"
+                />
+                <label htmlFor="categoryTypeNew">Create new category: </label>
+              </div>
               {categoryType === "new" && (
                 <input
                   type="text"
@@ -137,14 +141,15 @@ const CreatePromptModal = () => {
                   name="newCategory"
                 />
               )}
+
+              <br />
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create and Cancel buttons */}
-              <button type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl"></i>
-              </button>
-              <button onClick={() => setModalOpen(false)} type="button">
-                <i className="fa-solid fa-xmark fa-xl"></i>
-              </button>
+              <div className="modal-buttons">
+                <button type="submit">
+                  <i className="fa-solid fa-floppy-disk fa-xl"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>

@@ -52,39 +52,43 @@ export default function CreateImage() {
 
   return (
     <div className="main-card">
-      <h2 className="card-heading">Enter prompt to generate an image</h2>
-      <textarea
-        className="text-input"
-        placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
-        onChange={(e) => setPrompt(e.target.value)}
-        value={prompt} // inserts inspireMe prompt into textarea, the is the "prompt" state defined over in the App.jsx file.
-        rows="5"
-        cols="50"
-      />
-      <div className="button-container">
-        <button className="btn btn-generate" onClick={generateImage}>
-          Generate an Image
-        </button>
-        <button className="btn btn-inspire" onClick={inspireMe}>
-          Inspire Me!
-        </button>
-      </div>
-      {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
-      {result ? (
-        <div className="result-container">
-          <img className="result-img" src={result} alt="result" />
-          <button className="btn btn-regenerate" onClick={generateImage}>
-            Regenerate Image
+      <div className="generate-image">
+        <h2 className="card-heading">Enter prompt to generate an image</h2>
+        <textarea
+          className="text-input"
+          placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
+          onChange={(e) => setPrompt(e.target.value)}
+          value={prompt} // inserts inspireMe prompt into textarea, the is the "prompt" state defined over in the App.jsx file.
+          rows="5"
+          cols="50"
+        />
+        <div className="button-container">
+          <button className="btn btn-generate" onClick={generateImage}>
+            Generate an Image
+          </button>
+          <button className="btn btn-inspire" onClick={inspireMe}>
+            Inspire Me!
           </button>
         </div>
-      ) : (
-        <></>
-      )}
-      <CreatePrompt />
-      <SearchPrompt />
-      <UpdatePrompt />
-      <DeletePrompt />
-      <DeleteCategory />
+        {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
+        {result ? (
+          <div className="result-container">
+            <img className="result-img" src={result} alt="result" />
+            <button className="btn btn-regenerate" onClick={generateImage}>
+              Regenerate Image
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className="manage-prompts">
+        <CreatePrompt />
+        <SearchPrompt />
+        <UpdatePrompt />
+        <DeletePrompt />
+        <DeleteCategory />
+      </div>
     </div>
   )
 }

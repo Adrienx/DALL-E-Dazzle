@@ -58,22 +58,28 @@ const SearchPromptModal = () => {
       {modalOpen && (
         <div className="modal-container">
           <div className="modal-content-container">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
             {/* /////////////////////////////////////////////////////////////////// */}
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
             <form
+              className="search-form modal-form"
               onSubmit={(e) => {
                 e.preventDefault()
                 handleSearchPrompts()
               }}
             >
               {/* // Select Category from DropdownList/////////////////////////////// */}
-              <label>Select a Category: </label>
+
+              <div className="flex-label-existing">
+                <label>Select a Category: </label>
+              </div>
               <select
                 value={selectedCategoryId}
                 onChange={(e) => setSelectedCategoryId(e.target.value)}
@@ -87,11 +93,16 @@ const SearchPromptModal = () => {
                 ))}
               </select>
               {/* // Select Prompt to copy to clipboard ///////////////////////////////  */}
-              <button title="Search for Prompt to Copy" type="submit">
-                <i className="fa-solid fa-magnifying-glass fa-xl"></i>
-              </button>
+              <div className="modal-buttons">
+                <button title="Search for Prompt to Copy" type="submit">
+                  <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+                </button>
+              </div>
             </form>
-            <ul id="promptsList">
+            <div className="click-to-copy-msg">
+              <h3>(Click on prompt to copy to clipboard)</h3>
+            </div>
+            <ul className="ul-promptlist" id="promptsList">
               {prompts.map((prompt, index) => (
                 <li key={index} style={{ cursor: "pointer" }}>
                   <CopyToClipboard

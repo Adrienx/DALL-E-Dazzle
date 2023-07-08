@@ -80,29 +80,18 @@ const UpdatePromptModal = () => {
       {modalOpen && (
         <div className="modal-container">
           <div className="modal-content-container">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
             {/* /////////////////////////////////////////////////////////////////// */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="newTitle">Title:</label>
-              <input
-                type="text"
-                {...register("newTitle")}
-                id="newTitle"
-                name="newTitle"
-              />
-              <label htmlFor="newDescription">Description: </label>
-              <textarea
-                {...register("newDescription")}
-                id="newDescription"
-                name="newDescription"
-              />
-              <label htmlFor="updateCategorySelect">Category: </label>
+            <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="updateCategorySelect">Select Category: </label>
               <select
                 id="updateCategorySelect"
                 name="updateCategory"
@@ -116,9 +105,27 @@ const UpdatePromptModal = () => {
                   </option>
                 ))}
               </select>
+              <label htmlFor="newTitle">Title:</label>
+              <input
+                type="text"
+                {...register("newTitle")}
+                id="newTitle"
+                name="newTitle"
+              />
+              <label htmlFor="newDescription">Description: </label>
+              <textarea
+                {...register("newDescription")}
+                id="newDescription"
+                name="newDescription"
+                rows="5"
+                cols="50"
+              />
+
               {/* /////////////////////////////////////////////////////////////////// */}
-              <h5>(Click on prompt to edit)</h5>
-              <ul id="updatePromptsList">
+              <div className="click-to-copy-msg">
+                <h3>(Click on prompt to edit)</h3>
+              </div>
+              <ul className="ul-promptlist" id="updatePromptsList">
                 {prompts.map((prompt) => (
                   <li
                     key={prompt._id}
@@ -131,16 +138,11 @@ const UpdatePromptModal = () => {
               </ul>
 
               {/* /////////////////////////////////////////////////////////////////// */}
-              <button title="Save" type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl"></i>
-              </button>
-              <button
-                title="Cancel"
-                onClick={() => setModalOpen(false)}
-                type="button"
-              >
-                <i className="fa-solid fa-xmark fa-xl"></i>
-              </button>
+              <div className="modal-buttons">
+                <button type="submit">
+                  <i className="fa-solid fa-floppy-disk fa-xl"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>
