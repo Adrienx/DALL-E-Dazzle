@@ -1,8 +1,69 @@
-#root {
-  max-width: 1280px;
+.app {
+  font-family: "Pacifico", cursive;
+  width: 100%;
+  align-self: stretch;
+  justify-self: stretch;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+}
+
+.header {
+  background-color: #b42a2a24;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  font-size: 2rem;
+}
+
+nav {
+  display: flex;
+  line-height: 2.8;
+}
+
+.header h1 {
+  color: #df7d7d;
+  font-size: 3rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #df7d7d;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+  color: #ff7f7f;
+}
+
+button {
+  background-color: #df7d7d;
+  padding: 5px;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: #ff7f7f;
+  color: white;
+}
+
+input {
+  display: block;
+  width: 50vw;
+  padding: 0 1.25rem;
+  font-size: 1.2rem;
+  margin: 1rem 0;
 }
 
 .result-image {
@@ -14,9 +75,37 @@
   border: solid 5px;
   display: flex;
   justify-content: left;
+  padding: 10px;
 }
 
 li {
   list-style: none;
 }
 
+.modal-content-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border: 5px solid white;
+  padding: 15px;
+  width: 50%;
+  overflow: scroll;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 50%;
+}
+
+input {
+  width: 80%;
+}
+
+textarea {
+}
+
+.close {
+  font-size: 2rem;
+  color: #df7d7d;
+}

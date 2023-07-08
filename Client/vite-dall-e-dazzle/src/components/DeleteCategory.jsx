@@ -47,15 +47,16 @@ const DeleteCategoryModal = () => {
   return (
     <>
       <button
+        className="btn"
         onClick={() => setModalOpen(true)}
         disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
         title={categories.length ? "" : "No categories available"} // If categories array length is "0"/empty, then disaplay msg.
       >
-        Open Delete Category Modal
+        Delete Category
       </button>
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="modal-container">
+          <div className="modal-content-container">
             <span
               onClick={() => setModalOpen(false)}
               title="Close Modal"
@@ -69,7 +70,7 @@ const DeleteCategoryModal = () => {
                 handleCategoryDelete()
               }}
             >
-              <label>Select a Category:</label>
+              <label>Select a Category: </label>
               <select
                 value={selectedCategoryId}
                 onChange={(e) => setSelectedCategoryId(e.target.value)}
@@ -82,7 +83,10 @@ const DeleteCategoryModal = () => {
                   </option>
                 ))}
               </select>
-              <button type="submit">Delete Category</button>
+              <button title="Delete Entire Category" type="submit">
+                {" "}
+                <i className="far fa-trash-alt fa-xl"></i>
+              </button>
             </form>
           </div>
         </div>

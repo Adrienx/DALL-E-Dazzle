@@ -64,36 +64,36 @@ const CreatePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
-        Open Create New Prompt Modal
+      <button className="btn" onClick={() => setModalOpen(true)}>
+        Create New Prompt
       </button>
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
-
-            {/* /////////////////////////////////////////////////////////////////// */}
-            {/* // Form that handles the subission for new prompt creation */}
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="title">Title:</label>
+        <div className="modal-container">
+          <div className="modal-content-container">
+            <div>
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
+            <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
+              <label htmlFor="title">Title: </label>
               <input
                 type="text"
                 {...register("title", { required: true })}
                 id="title"
                 name="title"
               />
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="description">Description: </label>
               <textarea
                 {...register("description", { required: true })}
                 id="description"
                 name="description"
+                rows="5"
+                cols="50"
               />
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using existing category */}
@@ -104,7 +104,7 @@ const CreatePromptModal = () => {
                 id="categoryTypeExisting"
               />
               <label htmlFor="categoryTypeExisting">
-                Use existing category
+                Use existing category:
               </label>
               {categoryType === "existing" && (
                 <select
@@ -128,7 +128,7 @@ const CreatePromptModal = () => {
                 {...register("categoryType")}
                 id="categoryTypeNew"
               />
-              <label htmlFor="categoryTypeNew">Create new category</label>
+              <label htmlFor="categoryTypeNew">Create new category: </label>
               {categoryType === "new" && (
                 <input
                   type="text"

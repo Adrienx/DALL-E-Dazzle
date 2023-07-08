@@ -69,16 +69,17 @@ const UpdatePromptModal = () => {
   return (
     <>
       <button
+        className="btn"
         onClick={() => setModalOpen(true)}
         disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
         title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
       >
-        Open Update Existing Prompt Modal
+        Update Prompt
       </button>
 
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="modal-container">
+          <div className="modal-content-container">
             <span
               onClick={() => setModalOpen(false)}
               title="Close Modal"
@@ -95,19 +96,20 @@ const UpdatePromptModal = () => {
                 id="newTitle"
                 name="newTitle"
               />
-              <label htmlFor="newDescription">Description:</label>
+              <label htmlFor="newDescription">Description: </label>
               <textarea
                 {...register("newDescription")}
                 id="newDescription"
                 name="newDescription"
               />
-              <label htmlFor="updateCategorySelect">Category:</label>
+              <label htmlFor="updateCategorySelect">Category: </label>
               <select
                 id="updateCategorySelect"
                 name="updateCategory"
                 {...register("updateCategory")}
                 onChange={(e) => handleCategoryChange(e.target.value)}
               >
+                <option value="">Choose a Category</option>
                 {categories.map((category) => (
                   <option key={category._id} value={category._id}>
                     {category.name}
@@ -129,11 +131,15 @@ const UpdatePromptModal = () => {
               </ul>
 
               {/* /////////////////////////////////////////////////////////////////// */}
-              <button type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl">Save</i>
+              <button title="Save" type="submit">
+                <i className="fa-solid fa-floppy-disk fa-xl"></i>
               </button>
-              <button onClick={() => setModalOpen(false)} type="button">
-                <i className="fa-solid fa-xmark fa-xl">Cancel</i>
+              <button
+                title="Cancel"
+                onClick={() => setModalOpen(false)}
+                type="button"
+              >
+                <i className="fa-solid fa-xmark fa-xl"></i>
               </button>
             </form>
           </div>

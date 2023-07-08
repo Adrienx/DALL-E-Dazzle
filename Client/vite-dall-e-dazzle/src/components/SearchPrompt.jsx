@@ -48,15 +48,16 @@ const SearchPromptModal = () => {
   return (
     <>
       <button
+        className="btn"
         onClick={() => setModalOpen(true)}
         disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
         title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
       >
-        Open Search Prompts Modal
+        Search All Prompts
       </button>
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="modal-container">
+          <div className="modal-content-container">
             <span
               onClick={() => setModalOpen(false)}
               title="Close Modal"
@@ -72,7 +73,7 @@ const SearchPromptModal = () => {
               }}
             >
               {/* // Select Category from DropdownList/////////////////////////////// */}
-              <label>Select a Category:</label>
+              <label>Select a Category: </label>
               <select
                 value={selectedCategoryId}
                 onChange={(e) => setSelectedCategoryId(e.target.value)}
@@ -86,7 +87,9 @@ const SearchPromptModal = () => {
                 ))}
               </select>
               {/* // Select Prompt to copy to clipboard ///////////////////////////////  */}
-              <button type="submit">Search Prompts</button>
+              <button title="Search for Prompt to Copy" type="submit">
+                <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+              </button>
             </form>
             <ul id="promptsList">
               {prompts.map((prompt, index) => (
