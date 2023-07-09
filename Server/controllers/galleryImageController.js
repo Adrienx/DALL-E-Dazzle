@@ -36,11 +36,12 @@ const createGalleryImage = async (req, res) => {
     // const newImage = await new GalleryImage(req.body)
     // await newImage.save()
     // return res.status(201).json({ newImage })
-    const { image, prompt, favorite } = req.body
+    const { image, prompt, /* favorite */ } = req.body
     const imageUrl = await cloudinary.uploader.upload(image)
     
     const newImage = await GalleryImage.create({
-      image: imageUrl.url
+      image: imageUrl.url,
+      prompt,
     })
     return res.status(201).json({ newImage })
   } catch (error) {
@@ -48,9 +49,9 @@ const createGalleryImage = async (req, res) => {
   }
 }
 
-const uploadImage = async (req, res) => {
+// const uploadImage = async (req, res) => {
   
-}
+// }
 
 // WORKING:
 const deleteGalleryImage = async (req, res) => {

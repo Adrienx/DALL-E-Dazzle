@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const imageController = require("../controllers/galleryImageController")
 require("dotenv").config()
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary')
 
 // from Cloudinary implementation instructions:
 cloudinary.config({
