@@ -13,10 +13,22 @@
   padding: 20px;
   font-size: 2rem;
 }
+.landing-page-img {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+  width: 100%;
+}
 
 nav {
   display: flex;
   line-height: 2.8;
+  content: " | ";
+}
+
+nav ul li:not(:last-child)::after {
+  content: " | ";
+  color: lightgray;
 }
 
 .header h1 {
