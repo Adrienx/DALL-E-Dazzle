@@ -1,12 +1,19 @@
 import DataContext from "../DataContext"
 import { useContext, useState } from "react"
 import axios from "axios"
+// import { AdvancedImage } from '@cloudinary/react'
+import { Cloudinary } from "@cloudinary/url-gen"
+// import { URLConfig } from "@cloudinary/url-gen";
+// import { CloudConfig } from "@cloudinary/url-gen"
 import { inspirationPrompts } from "../data/inspirationPrompts"
 import CreatePrompt from "./CreatePrompt"
 import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
+
+// import { GalleryImage } from "../../../../Server/models"
 import DeleteCategory from "./DeleteCategory"
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 export default function CreateImage() {
@@ -39,6 +46,35 @@ export default function CreateImage() {
       setLoading(false) // set loading state to false after image is fetched
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
+
+  // Function to send 'result' image url (from Adrien's code) to Cloudinary for upload
+
+  const imageToCloudinary = async () => {
+    Cloudinary.v2.uploader
+      .unsigned_upload(`${result}`, `${cloudName}`)
+      .then(result => console.log(result))
+  }
+
+  // Function to return the corresponding Cloudinary URL for the hosted image
+  // Store the image and its cld URL in the mongo DB as a new object
+  // Display new image on gallery page
+
+  // const saveImage = async () => {
+  //   try {
+  //     const { image, setImage } = useContext(DataContext)
+  //     let myImage = new CloudinaryImage('dall-e-dazzle')
+  //     // const imageUrl = await cloudinary.uploader.upload(image)
+  //     const newImage = await GalleryImage.create({
+  //       image: myImage
+  //     })
+  //     setImage(newImage)
+  //     return res.status(201).json({ newImage })
+  //   } catch (error) {
+  //     return res.status(500).json({ error: error.message })
+  //   }
+  // }
 
   ////////////////////////////////////////////////////////////////////////////////////////////
   // Show "Loading..." text while fetching image
@@ -74,6 +110,7 @@ export default function CreateImage() {
             </button>
           </div>
         </div>
+      </div>
         {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
         {result ? (
           <div className="result-container">
@@ -81,6 +118,7 @@ export default function CreateImage() {
             <button className="btn btn-regenerate" onClick={generateImage}>
               Regenerate Image
             </button>
+         <button onClick={imageToCloudinary}>Save to Gallery</button>
           </div>
         ) : (
           <></>

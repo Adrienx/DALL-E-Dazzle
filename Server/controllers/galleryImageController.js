@@ -1,4 +1,4 @@
-const { GalleryImage } = require("../models/index.js")
+const { GalleryImage } = require("../models/galleryImage")
 
 const index = async (req, res) => {
   try {
@@ -29,15 +29,27 @@ const getGalleryImageById = async (req, res) => {
   }
 }
 
-// WORKING:
+// WORKING (on back-end):
 const createGalleryImage = async (req, res) => {
   try {
-    const newImage = await new GalleryImage(req.body)
-    await newImage.save()
+    // Elliot original working back-end code to add new image to galleryImages.js seed:
+    // const newImage = await new GalleryImage(req.body)
+    // await newImage.save()
+    // return res.status(201).json({ newImage })
+    const { image, prompt, favorite } = req.body
+    const imageUrl = await cloudinary.uploader.upload(image)
+    
+    const newImage = await GalleryImage.create({
+      image: imageUrl.url
+    })
     return res.status(201).json({ newImage })
   } catch (error) {
     return res.status(500).json({ error: error.message })
   }
+}
+
+const uploadImage = async (req, res) => {
+  
 }
 
 // WORKING:
