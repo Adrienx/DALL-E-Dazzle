@@ -44,7 +44,7 @@ export default function CreateImage() {
   // Show "Loading..." text while fetching image
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div className="loading">Loading...</div>
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +53,7 @@ export default function CreateImage() {
   return (
     <div className="main-card">
       <div className="generate-image">
-        <h2 className="card-heading">Enter prompt to generate an image</h2>
+        <h2 className="card-heading">Enter Prompt to Generate Image: </h2>
         <textarea
           className="text-input"
           placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
@@ -63,17 +63,21 @@ export default function CreateImage() {
           cols="50"
         />
         <div className="button-container">
-          <button className="btn btn-generate" onClick={generateImage}>
-            Generate an Image
-          </button>
-          <button className="btn btn-inspire" onClick={inspireMe}>
-            Inspire Me!
-          </button>
+          <div>
+            <button className="btn btn-generate" onClick={generateImage}>
+              Generate an Image
+            </button>
+          </div>
+          <div>
+            <button className="btn btn-inspire" onClick={inspireMe}>
+              Inspire Me!
+            </button>
+          </div>
         </div>
         {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
         {result ? (
           <div className="result-container">
-            <img className="result-img" src={result} alt="result" />
+            <img className="result-img" src={result} alt="result" /> <br />
             <button className="btn btn-regenerate" onClick={generateImage}>
               Regenerate Image
             </button>
@@ -83,10 +87,10 @@ export default function CreateImage() {
         )}
       </div>
       <div className="manage-prompts">
-        <CreatePrompt />
-        <SearchPrompt />
-        <UpdatePrompt />
-        <DeletePrompt />
+        <CreatePrompt /> <br />
+        <SearchPrompt /> <br />
+        <UpdatePrompt /> <br />
+        <DeletePrompt /> <br />
         <DeleteCategory />
       </div>
     </div>

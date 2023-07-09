@@ -44,6 +44,13 @@ nav ul li a {
 nav ul li a:hover {
   color: #ff7f7f;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin: 500px;
+  font-size: 3rem;
+}
 /* Buttons */
 .btn {
   font-size: 1em;
@@ -58,6 +65,42 @@ nav ul li a:hover {
 
 .btn:hover {
   background-color: #0056b3;
+}
+
+.main-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  margin: 150px;
+}
+
+.generate-image {
+  border: solid 5px;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.manage-prompts {
+  border: solid 5px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
 
 /* modals */
