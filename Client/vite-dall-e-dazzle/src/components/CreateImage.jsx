@@ -1,23 +1,19 @@
 import DataContext from "../DataContext"
 import { useContext, useState } from "react"
+import React from 'react'
 import axios from "axios"
-// import { AdvancedImage } from '@cloudinary/react'
-import { Cloudinary } from "@cloudinary/url-gen"
-// import { URLConfig } from "@cloudinary/url-gen";
-// import { CloudConfig } from "@cloudinary/url-gen"
+// import { Cloudinary } from "@cloudinary/url-gen"
 import { inspirationPrompts } from "../data/inspirationPrompts"
 import CreatePrompt from "./CreatePrompt"
 import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
-
-// import { GalleryImage } from "../../../../Server/models"
 import DeleteCategory from "./DeleteCategory"
-
+import ImageUploader from './ImageUploader'
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 export default function CreateImage() {
-  const { prompt, setPrompt, result, setResult } = useContext(DataContext)
+  const { prompt, setPrompt, result, setResult, cloudImage, setCloudImage } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
 
   ////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +33,13 @@ export default function CreateImage() {
       setLoading(true) // set loading state to true when starting to fetch image
       const res = await axios.get(
         `http://localhost:3001/api/generateImage?prompt=${prompt}`
+        // {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ prompt: prompt }),
+        // }
       )
       // console.log(res.data.imageUrl)
       setResult(res.data.imageUrl)
@@ -51,11 +54,16 @@ export default function CreateImage() {
 
   // Function to send 'result' image url (from Adrien's code) to Cloudinary for upload
 
-  const imageToCloudinary = async () => {
-    Cloudinary.v2.uploader
-      .unsigned_upload(`${result}`, `${cloudName}`)
-      .then(result => console.log(result))
-  }
+  // const imageToCloudinary = async () => {
+  //   Cloudinary.v2.uploader
+  //   .upload(`${result}`,
+  //     { responsive_breakpoints: 
+  //       { create_derived: true, 
+  //         bytes_step: 20000, 
+  //         min_width: 200, 
+  //         max_width: 1000 }})
+  //   .then(result=>console.log(result))
+  // }
 
   // Function to return the corresponding Cloudinary URL for the hosted image
   // Store the image and its cld URL in the mongo DB as a new object
@@ -111,6 +119,7 @@ export default function CreateImage() {
           </div>
         </div>
       </div>
+      <div>
         {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
         {result ? (
           <div className="result-container">
@@ -118,7 +127,7 @@ export default function CreateImage() {
             <button className="btn btn-regenerate" onClick={generateImage}>
               Regenerate Image
             </button>
-         <button onClick={imageToCloudinary}>Save to Gallery</button>
+<ImageUploader />
           </div>
         ) : (
           <></>
