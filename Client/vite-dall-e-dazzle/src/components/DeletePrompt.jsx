@@ -71,44 +71,62 @@ const DeletePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
-        Open Delete Prompts Modal
+      <button
+        className="btn"
+        onClick={() => setModalOpen(true)}
+        disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
+        title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
+      >
+        Delete Prompt
       </button>
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
+        <div className="modal-container">
+          <div className="modal-content-container">
             {/* /////////////////////////////////////////////////////////////////// */}
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
             <form
+              className="search-form modal-form"
               onSubmit={(e) => {
                 e.preventDefault()
                 handleSearchPrompts()
               }}
             >
-              <label>Select a Category:</label>
-              <select
-                value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}
-                required
-              >
-                <option value="">Choose a Category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-              <button type="submit">Search Prompts</button>
+              <div className="modal-inputs">
+                <div className="flex-label-existing">
+                  <label>Select a Category: </label>
+                </div>
+                <select
+                  value={selectedCategoryId}
+                  onChange={(e) => setSelectedCategoryId(e.target.value)}
+                  required
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="modal-buttons">
+                <button title="Search for Prompt to Delete" type="submit">
+                  <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+                </button>
+              </div>
             </form>
             {/* /////////////////////////////////////////////////////////////////// */}
-            <h5>(Click on prompt to delete)</h5>
-            <ul id="promptsList">
+            <div className="click-msg">
+              <h3>(Click on prompt to delete)</h3>
+            </div>
+            <ul className="ul-promptlist" id="promptsList">
               {prompts.map((prompt, index) => (
                 <li
                   key={index}

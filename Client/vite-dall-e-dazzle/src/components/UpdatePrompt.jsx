@@ -68,50 +68,65 @@ const UpdatePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
-        Open Update Existing Prompt Modal
+      <button
+        className="btn"
+        onClick={() => setModalOpen(true)}
+        disabled={!categories.length} // Button disabled if categories.length is "false" or "0", ie no categories left.
+        title={categories.length ? "" : "No prompts available"} // If categories array length is "0"/empty, then disaplay msg.
+      >
+        Update Prompt
       </button>
+
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
-            {/* /////////////////////////////////////////////////////////////////// */}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="newTitle">Title:</label>
-              <input
-                type="text"
-                {...register("newTitle")}
-                id="newTitle"
-                name="newTitle"
-              />
-              <label htmlFor="newDescription">Description:</label>
-              <textarea
-                {...register("newDescription")}
-                id="newDescription"
-                name="newDescription"
-              />
-              <label htmlFor="updateCategorySelect">Category:</label>
-              <select
-                id="updateCategorySelect"
-                name="updateCategory"
-                {...register("updateCategory")}
-                onChange={(e) => handleCategoryChange(e.target.value)}
+        <div className="modal-container">
+          <div className="modal-content-container">
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
               >
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+                &times;
+              </span>
+            </div>
+            {/* /////////////////////////////////////////////////////////////////// */}
+            <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
+              <div className="modal-inputs">
+                <label htmlFor="updateCategorySelect">Select Category: </label>
+                <select
+                  id="updateCategorySelect"
+                  name="updateCategory"
+                  {...register("updateCategory")}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="newTitle">Title:</label>
+                <input
+                  type="text"
+                  {...register("newTitle")}
+                  id="newTitle"
+                  name="newTitle"
+                />
+                <label htmlFor="newDescription">Description: </label>
+                <textarea
+                  {...register("newDescription")}
+                  id="newDescription"
+                  name="newDescription"
+                  rows="5"
+                  cols="50"
+                />
+              </div>
               {/* /////////////////////////////////////////////////////////////////// */}
-              <h5>(Click on prompt to edit)</h5>
-              <ul id="updatePromptsList">
+              <div className="click-msg">
+                <h3>(Click on prompt to edit)</h3>
+              </div>
+              <ul className="ul-promptlist" id="updatePromptsList">
                 {prompts.map((prompt) => (
                   <li
                     key={prompt._id}
@@ -124,12 +139,11 @@ const UpdatePromptModal = () => {
               </ul>
 
               {/* /////////////////////////////////////////////////////////////////// */}
-              <button type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl">Save</i>
-              </button>
-              <button onClick={() => setModalOpen(false)} type="button">
-                <i className="fa-solid fa-xmark fa-xl">Cancel</i>
-              </button>
+              <div className="modal-buttons">
+                <button type="submit">
+                  <i className="fa-solid fa-floppy-disk fa-xl"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>

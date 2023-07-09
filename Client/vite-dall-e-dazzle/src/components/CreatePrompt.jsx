@@ -64,48 +64,52 @@ const CreatePromptModal = () => {
 
   return (
     <>
-      <button onClick={() => setModalOpen(true)}>
-        Open Create New Prompt Modal
+      <button className="btn" onClick={() => setModalOpen(true)}>
+        Create New Prompt
       </button>
       {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
-
-            {/* /////////////////////////////////////////////////////////////////// */}
-            {/* // Form that handles the subission for new prompt creation */}
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="title">Title:</label>
-              <input
-                type="text"
-                {...register("title", { required: true })}
-                id="title"
-                name="title"
-              />
-              <label htmlFor="description">Description:</label>
-              <textarea
-                {...register("description", { required: true })}
-                id="description"
-                name="description"
-              />
+        <div className="modal-container">
+          <div className="modal-content-container">
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
+            <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
+              <div className="modal-inputs">
+                <label htmlFor="title">Title: </label>
+                <input
+                  type="text"
+                  {...register("title", { required: true })}
+                  id="title"
+                  name="title"
+                />
+                <label htmlFor="description">Description: </label>
+                <textarea
+                  {...register("description", { required: true })}
+                  id="description"
+                  name="description"
+                  rows="5"
+                  cols="50"
+                />
+              </div>
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using existing category */}
-              <input
-                type="radio"
-                value="existing"
-                {...register("categoryType")}
-                id="categoryTypeExisting"
-              />
-              <label htmlFor="categoryTypeExisting">
-                Use existing category
-              </label>
+              <div className="flex-label-existing">
+                <input
+                  type="radio"
+                  value="existing"
+                  {...register("categoryType")}
+                  id="categoryTypeExisting"
+                />
+                <label htmlFor="categoryTypeExisting">
+                  Use existing category:
+                </label>
+              </div>
               {categoryType === "existing" && (
                 <select
                   id="categorySelect"
@@ -122,13 +126,15 @@ const CreatePromptModal = () => {
               )}
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using new category */}
-              <input
-                type="radio"
-                value="new"
-                {...register("categoryType")}
-                id="categoryTypeNew"
-              />
-              <label htmlFor="categoryTypeNew">Create new category</label>
+              <div className="flex-label-new">
+                <input
+                  type="radio"
+                  value="new"
+                  {...register("categoryType")}
+                  id="categoryTypeNew"
+                />
+                <label htmlFor="categoryTypeNew">Create new category: </label>
+              </div>
               {categoryType === "new" && (
                 <input
                   type="text"
@@ -137,14 +143,15 @@ const CreatePromptModal = () => {
                   name="newCategory"
                 />
               )}
+
+              <br />
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create and Cancel buttons */}
-              <button type="submit">
-                <i className="fa-solid fa-floppy-disk fa-xl">Create</i>
-              </button>
-              <button onClick={() => setModalOpen(false)} type="button">
-                <i className="fa-solid fa-xmark fa-xl">Cancel</i>
-              </button>
+              <div className="modal-buttons">
+                <button type="submit">
+                  <i className="fa-solid fa-floppy-disk fa-xl"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>

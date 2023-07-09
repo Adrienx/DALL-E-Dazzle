@@ -10,7 +10,10 @@ import CreatePrompt from "./CreatePrompt"
 import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
+
 // import { GalleryImage } from "../../../../Server/models"
+import DeleteCategory from "./DeleteCategory"
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 export default function CreateImage() {
@@ -77,45 +80,57 @@ export default function CreateImage() {
   // Show "Loading..." text while fetching image
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div className="loading">Loading...</div>
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////
-  // Handles the display of textarea, 3 buttons (Generate Image, Regenerate Image, Inspire Me), and the generated image itself.
+  // Handles the display of textarea, buttons for modals and the generated image itself.
 
   return (
-    <div className="card">
-      <h2>Enter prompt to generate an image</h2>
-      <textarea
-        className="app-input"
-        placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
-        onChange={(e) => setPrompt(e.target.value)}
-        value={prompt} // inserts inspireMe prompt into textarea, the is the "prompt" state defined over in the App.jsx file.
-        rows="5"
-        cols="50"
-      />
-      <div>
-        <div className="button">
-          <button onClick={generateImage}>Generate an Image</button>
-          <button onClick={inspireMe}>Inspire Me!</button>
+    <div className="main-card">
+      <div className="generate-image">
+        <h2 className="card-heading">Enter Prompt to Generate Image: </h2>
+        <textarea
+          className="text-input"
+          placeholder="An Anime Styled Sword-Weilding Corgi wearing Military Gear in a Forest.."
+          onChange={(e) => setPrompt(e.target.value)}
+          value={prompt} // inserts inspireMe prompt into textarea, the is the "prompt" state defined over in the App.jsx file.
+          rows="5"
+          cols="50"
+        />
+        <div className="button-container">
+          <div>
+            <button className="btn btn-generate" onClick={generateImage}>
+              Generate an Image
+            </button>
+          </div>
+          <div>
+            <button className="btn btn-inspire" onClick={inspireMe}>
+              Inspire Me!
+            </button>
+          </div>
         </div>
       </div>
-      {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
-      {result ? (
-        <>
-          <img className="result-image" src={result} alt="result" />
-          <div className="button">
-            <button onClick={generateImage}>Regenerate Image</button>
-            <button onClick={imageToCloudinary}>Save to Gallery</button>
+        {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
+        {result ? (
+          <div className="result-container">
+            <img className="result-img" src={result} alt="result" /> <br />
+            <button className="btn btn-regenerate" onClick={generateImage}>
+              Regenerate Image
+            </button>
+         <button onClick={imageToCloudinary}>Save to Gallery</button>
           </div>
-        </>
-      ) : (
-        <></>
-      )}
-      <CreatePrompt />
-      <SearchPrompt />
-      <UpdatePrompt />
-      <DeletePrompt />
+        ) : (
+          <></>
+        )}
+      </div>
+      <div className="manage-prompts">
+        <CreatePrompt /> <br />
+        <SearchPrompt /> <br />
+        <UpdatePrompt /> <br />
+        <DeletePrompt /> <br />
+        <DeleteCategory />
+      </div>
     </div>
   )
 }
