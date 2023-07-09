@@ -13,10 +13,22 @@
   padding: 20px;
   font-size: 2rem;
 }
+.landing-page-img {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+  width: 100%;
+}
 
 nav {
   display: flex;
   line-height: 2.8;
+  content: " | ";
+}
+
+nav ul li:not(:last-child)::after {
+  content: " | ";
+  color: lightgray;
 }
 
 .header h1 {
@@ -44,6 +56,13 @@ nav ul li a {
 nav ul li a:hover {
   color: #ff7f7f;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin: 500px;
+  font-size: 3rem;
+}
 /* Buttons */
 .btn {
   font-size: 1em;
@@ -58,6 +77,42 @@ nav ul li a:hover {
 
 .btn:hover {
   background-color: #0056b3;
+}
+
+.main-card {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  margin: 150px;
+}
+
+.generate-image {
+  border: solid 5px;
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.manage-prompts {
+  border: solid 5px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
 }
 
 /* modals */
@@ -91,7 +146,7 @@ nav ul li a:hover {
 }
 
 .modal-form input[type="text"] {
-  width: 78%;
+  width: 100%;
 }
 
 .modal-form input[type="text"],
@@ -102,7 +157,7 @@ nav ul li a:hover {
   border: none;
   background: #060606;
   border-radius: 5px;
-  width: 80%;
+  width: 100%;
 }
 
 .modal-form button {
@@ -130,7 +185,7 @@ nav ul li a:hover {
 
 .modal-buttons {
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 
 .flex-label-new {
@@ -162,21 +217,14 @@ nav ul li a:hover {
   display: flex;
   flex-direction: column;
   /* width: 50%; */
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .ul-promptlist {
-  display: block;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  /* margin-inline-start: 16px; */
-  /* margin-inline-end: 16px; */
-  /* padding-inline-start: 10px; */
   border: 5px solid white;
 }
 
-.click-to-copy-msg {
+.click-msg {
   display: flex;
   justify-content: center;
 }
@@ -185,6 +233,13 @@ nav ul li a:hover {
   .modal-content-container {
     width: 90%;
   }
+}
+
+.modal-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /* 

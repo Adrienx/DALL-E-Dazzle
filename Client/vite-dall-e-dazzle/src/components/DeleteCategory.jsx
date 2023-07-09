@@ -57,32 +57,39 @@ const DeleteCategoryModal = () => {
       {modalOpen && (
         <div className="modal-container">
           <div className="modal-content-container">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
             <form
+              className="search-form modal-form"
               onSubmit={(e) => {
                 e.preventDefault()
                 handleCategoryDelete()
               }}
             >
-              <label>Select a Category: </label>
-              <select
-                value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}
-                required
-              >
-                <option value="">Choose a Category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
+              <div className="modal-inputs">
+                <div className="flex-label-existing">
+                  <label>Select a Category: </label>
+                </div>
+                <select
+                  value={selectedCategoryId}
+                  onChange={(e) => setSelectedCategoryId(e.target.value)}
+                  required
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <button title="Delete Entire Category" type="submit">
                 {" "}
                 <i className="far fa-trash-alt fa-xl"></i>

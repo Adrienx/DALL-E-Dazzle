@@ -91,38 +91,39 @@ const UpdatePromptModal = () => {
             </div>
             {/* /////////////////////////////////////////////////////////////////// */}
             <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="updateCategorySelect">Select Category: </label>
-              <select
-                id="updateCategorySelect"
-                name="updateCategory"
-                {...register("updateCategory")}
-                onChange={(e) => handleCategoryChange(e.target.value)}
-              >
-                <option value="">Choose a Category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-              <label htmlFor="newTitle">Title:</label>
-              <input
-                type="text"
-                {...register("newTitle")}
-                id="newTitle"
-                name="newTitle"
-              />
-              <label htmlFor="newDescription">Description: </label>
-              <textarea
-                {...register("newDescription")}
-                id="newDescription"
-                name="newDescription"
-                rows="5"
-                cols="50"
-              />
-
+              <div className="modal-inputs">
+                <label htmlFor="updateCategorySelect">Select Category: </label>
+                <select
+                  id="updateCategorySelect"
+                  name="updateCategory"
+                  {...register("updateCategory")}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+                <label htmlFor="newTitle">Title:</label>
+                <input
+                  type="text"
+                  {...register("newTitle")}
+                  id="newTitle"
+                  name="newTitle"
+                />
+                <label htmlFor="newDescription">Description: </label>
+                <textarea
+                  {...register("newDescription")}
+                  id="newDescription"
+                  name="newDescription"
+                  rows="5"
+                  cols="50"
+                />
+              </div>
               {/* /////////////////////////////////////////////////////////////////// */}
-              <div className="click-to-copy-msg">
+              <div className="click-msg">
                 <h3>(Click on prompt to edit)</h3>
               </div>
               <ul className="ul-promptlist" id="updatePromptsList">
