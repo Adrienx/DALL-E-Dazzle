@@ -76,22 +76,23 @@ const SearchPromptModal = () => {
               }}
             >
               {/* // Select Category from DropdownList/////////////////////////////// */}
-
-              <div className="flex-label-existing">
-                <label>Select a Category: </label>
+              <div className="modal-inputs">
+                <div className="flex-label-existing">
+                  <label>Select a Category: </label>
+                </div>
+                <select
+                  value={selectedCategoryId}
+                  onChange={(e) => setSelectedCategoryId(e.target.value)}
+                  required
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <select
-                value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}
-                required
-              >
-                <option value="">Choose a Category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
               {/* // Select Prompt to copy to clipboard ///////////////////////////////  */}
               <div className="modal-buttons">
                 <button title="Search for Prompt to Copy" type="submit">
@@ -99,7 +100,7 @@ const SearchPromptModal = () => {
                 </button>
               </div>
             </form>
-            <div className="click-to-copy-msg">
+            <div className="click-msg">
               <h3>(Click on prompt to copy to clipboard)</h3>
             </div>
             <ul className="ul-promptlist" id="promptsList">

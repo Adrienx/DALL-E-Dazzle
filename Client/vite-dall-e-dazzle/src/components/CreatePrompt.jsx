@@ -80,21 +80,23 @@ const CreatePromptModal = () => {
               </span>
             </div>
             <form className="modal-form" onSubmit={handleSubmit(onSubmit)}>
-              <label htmlFor="title">Title: </label>
-              <input
-                type="text"
-                {...register("title", { required: true })}
-                id="title"
-                name="title"
-              />
-              <label htmlFor="description">Description: </label>
-              <textarea
-                {...register("description", { required: true })}
-                id="description"
-                name="description"
-                rows="5"
-                cols="50"
-              />
+              <div className="modal-inputs">
+                <label htmlFor="title">Title: </label>
+                <input
+                  type="text"
+                  {...register("title", { required: true })}
+                  id="title"
+                  name="title"
+                />
+                <label htmlFor="description">Description: </label>
+                <textarea
+                  {...register("description", { required: true })}
+                  id="description"
+                  name="description"
+                  rows="5"
+                  cols="50"
+                />
+              </div>
               {/* /////////////////////////////////////////////////////////////////// */}
               {/* // Create prompt using existing category */}
               <div className="flex-label-existing">

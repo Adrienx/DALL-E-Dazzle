@@ -91,7 +91,7 @@ nav ul li a:hover {
 }
 
 .modal-form input[type="text"] {
-  width: 78%;
+  width: 100%;
 }
 
 .modal-form input[type="text"],
@@ -102,7 +102,7 @@ nav ul li a:hover {
   border: none;
   background: #060606;
   border-radius: 5px;
-  width: 80%;
+  width: 100%;
 }
 
 .modal-form button {
@@ -130,7 +130,7 @@ nav ul li a:hover {
 
 .modal-buttons {
   display: flex;
-  justify-content: right;
+  justify-content: center;
 }
 
 .flex-label-new {
@@ -162,21 +162,14 @@ nav ul li a:hover {
   display: flex;
   flex-direction: column;
   /* width: 50%; */
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .ul-promptlist {
-  display: block;
-  list-style-type: disc;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  /* margin-inline-start: 16px; */
-  /* margin-inline-end: 16px; */
-  /* padding-inline-start: 10px; */
   border: 5px solid white;
 }
 
-.click-to-copy-msg {
+.click-msg {
   display: flex;
   justify-content: center;
 }
@@ -185,6 +178,13 @@ nav ul li a:hover {
   .modal-content-container {
     width: 90%;
   }
+}
+
+.modal-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /* 

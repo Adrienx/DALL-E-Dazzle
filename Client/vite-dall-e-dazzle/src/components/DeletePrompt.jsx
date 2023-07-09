@@ -82,41 +82,51 @@ const DeletePromptModal = () => {
       {modalOpen && (
         <div className="modal-container">
           <div className="modal-content-container">
-            <span
-              onClick={() => setModalOpen(false)}
-              title="Close Modal"
-              className="close"
-            >
-              &times;
-            </span>
             {/* /////////////////////////////////////////////////////////////////// */}
+            <div className="close-modal">
+              <span
+                onClick={() => setModalOpen(false)}
+                title="Close Modal"
+                className="close"
+              >
+                &times;
+              </span>
+            </div>
             <form
+              className="search-form modal-form"
               onSubmit={(e) => {
                 e.preventDefault()
                 handleSearchPrompts()
               }}
             >
-              <label>Select a Category: </label>
-              <select
-                value={selectedCategoryId}
-                onChange={(e) => setSelectedCategoryId(e.target.value)}
-                required
-              >
-                <option value="">Choose a Category</option>
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-              <button title="Search for Prompt to Delete" type="submit">
-                {" "}
-                <i className="fa-solid fa-magnifying-glass fa-xl"></i>
-              </button>
+              <div className="modal-inputs">
+                <div className="flex-label-existing">
+                  <label>Select a Category: </label>
+                </div>
+                <select
+                  value={selectedCategoryId}
+                  onChange={(e) => setSelectedCategoryId(e.target.value)}
+                  required
+                >
+                  <option value="">Choose a Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="modal-buttons">
+                <button title="Search for Prompt to Delete" type="submit">
+                  <i className="fa-solid fa-magnifying-glass fa-xl"></i>
+                </button>
+              </div>
             </form>
             {/* /////////////////////////////////////////////////////////////////// */}
-            <h5>(Click on prompt to delete)</h5>
-            <ul id="promptsList">
+            <div className="click-msg">
+              <h3>(Click on prompt to delete)</h3>
+            </div>
+            <ul className="ul-promptlist" id="promptsList">
               {prompts.map((prompt, index) => (
                 <li
                   key={index}
