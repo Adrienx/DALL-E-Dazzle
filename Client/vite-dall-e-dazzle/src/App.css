@@ -1,5 +1,5 @@
 .app {
-  font-family: "Pacifico", cursive;
+  font-family: "Inter", sans-serif;
   width: 100%;
   align-self: stretch;
   justify-self: stretch;
@@ -12,17 +12,20 @@
   justify-content: space-between;
   padding: 20px;
   font-size: 2rem;
+  font-family: 'Agdasima', sans-serif;
 }
 .landing-page-img {
   display: flex;
   justify-content: center;
-  margin: 100px;
-  width: 100%;
+  margin: 0 auto;
+  margin-top: 2em;
+  width: 40vw;
+  height: 60vh;
 }
 
 nav {
   display: flex;
-  line-height: 2.8;
+  line-height: 2.8em;
   content: " | ";
 }
 
@@ -34,6 +37,7 @@ nav ul li:not(:last-child)::after {
 .header h1 {
   color: #df7d7d;
   font-size: 3rem;
+  font-family: 'Agdasima', sans-serif;
 }
 
 nav ul {
@@ -41,6 +45,7 @@ nav ul {
   justify-content: center;
   list-style-type: none;
   padding-left: 0;
+  font-size: 2rem;
 }
 
 nav ul li {
