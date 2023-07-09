@@ -11,40 +11,44 @@ const seedDB = async () => {
 
   // Define categories
   const categories = [
-    "SEO",
-    "Writing/Blogging",
-    "Analyzing Data",
-    "Reading",
-    "General",
+    "Cosmic Art",
+    "Abstract Conceptual Art",
+    "Nature's Narrative",
+    "Expressive Human Art",
+    "Dreamscape Design",
   ]
 
   // Define prompts
   const prompts = [
     {
-      title: "Meta Tag best Practice",
-      description: "Research the best meta tags for [topic]",
-      category: "SEO",
-    },
-    {
-      title: "Financial Planning blog help",
-      description: "Blog post on [financial planning]?",
-      category: "Writing/Blogging",
-    },
-    {
-      title: "Create Table from Data",
-      description: "Can you create a table from this data?: [your data]",
-      category: "Analyzing Data",
-    },
-    {
-      title: "Text Summary",
-      description: "Can you please summarize this article for me? [your text]",
-      category: "Reading",
-    },
-    {
-      title: "Interview Help",
+      title: "The Symphony of the Cosmos",
       description:
-        "I'm interviewing for a software engineer position, can you give me some interview questions? ",
-      category: "General",
+        "Visualize a cosmic orchestra where celestial bodies, from swirling galaxies to radiant stars, are instruments in a grand symphony of the universe. Each note is a burst of cosmic energy.",
+      category: "Cosmic Art",
+    },
+    {
+      title: "Temporal Tapestry",
+      description:
+        "Illustrate the abstract concept of time as a grand tapestry being woven by ageless beings. The threads represent moments, intertwining and influencing one another in complex patterns.",
+      category: "Abstract Conceptual Art",
+    },
+    {
+      title: "Whispers of the Forest",
+      description:
+        "Depict a serene forest where every creature, tree, and leaf seems to be sharing stories in hushed whispers. Their communication forms an invisible network of pulsating energy.",
+      category: "Nature's Narrative",
+    },
+    {
+      title: "The Dance of Emotions",
+      description:
+        "Create a dynamic dance scene where each dancer personifies a different emotion. The movements, colors, and expressions should provide a deeper understanding of our emotional spectrum.",
+      category: "Expressive Human Art",
+    },
+    {
+      title: "The Architecture of Dreams",
+      description:
+        "Picture an ethereal cityscape that is influenced by the fluid and fantastical architecture of our dreams. Gravity-defying structures and impossible geometry are the norm here.",
+      category: "Dreamscape Design",
     },
   ]
 
