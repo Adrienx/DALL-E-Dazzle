@@ -10,6 +10,7 @@ import CreatePrompt from "./CreatePrompt"
 import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
+
 import DeleteCategory from "./DeleteCategory"
 // import { GalleryImage } from "../../../../Server/models"
 
@@ -108,6 +109,7 @@ export default function CreateImage() {
             </button>
           </div>
         </div>
+      </div>
         {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
         {result ? (
           <div className="result-container">
@@ -115,7 +117,7 @@ export default function CreateImage() {
             <button className="btn btn-regenerate" onClick={generateImage}>
               Regenerate Image
             </button>
-            <button onClick={imageToCloudinary}>Save to Gallery</button>
+         <button onClick={imageToCloudinary}>Save to Gallery</button>
           </div>
         ) : (
           <></>
