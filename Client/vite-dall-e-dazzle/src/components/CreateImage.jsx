@@ -1,6 +1,6 @@
 import DataContext from "../DataContext"
 import { useContext, useState } from "react"
-import React from 'react'
+import React from "react"
 import axios from "axios"
 import { inspirationPrompts } from "../data/inspirationPrompts"
 import CreatePrompt from "./CreatePrompt"
@@ -8,7 +8,7 @@ import SearchPrompt from "./SearchPrompt"
 import UpdatePrompt from "./UpdatePrompt"
 import DeletePrompt from "./DeletePrompt"
 import DeleteCategory from "./DeleteCategory"
-import ImageUploader from './ImageUploader'
+import ImageUploader from "./ImageUploader"
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 export default function CreateImage() {
@@ -41,14 +41,6 @@ export default function CreateImage() {
       setLoading(false) // set loading state to false after image is fetched
     }
   }
-
-  ////////////////////////////////////////////////////////////////////////////////////////////
-
-  // Function to return the corresponding Cloudinary URL for the hosted image
-  // Store the image and its cld URL in the mongo DB as a new object
-  // Display new image on gallery page
-
-
 
   ////////////////////////////////////////////////////////////////////////////////////////////
   // Show "Loading..." text while fetching image
@@ -84,20 +76,21 @@ export default function CreateImage() {
             </button>
           </div>
         </div>
-      </div>
-      <div>
-        {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
-        {result ? (
-          <div className="result-container">
-            <img className="result-img" src={result} alt="result" /> <br />
-            <button className="btn btn-regenerate" onClick={generateImage}>
-              Regenerate Image
-            </button>
-<ImageUploader />
-          </div>
-        ) : (
-          <></>
-        )}
+
+        <div>
+          {/* Ternary operator-if 'result' state contains an image URL, display an img element with the source set to the URL and a 'Regenerate Image' button is shown. If no 'result', display nothing. */}
+          {result ? (
+            <div className="result-container">
+              <img className="result-img" src={result} alt="result" /> <br />
+              <button className="btn btn-regenerate" onClick={generateImage}>
+                Regenerate Image
+              </button>
+              <ImageUploader />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       <div className="manage-prompts">
         <CreatePrompt /> <br />
