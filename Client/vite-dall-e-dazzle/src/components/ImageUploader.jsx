@@ -25,7 +25,7 @@ const ImageUploader = () => {
 
     return (
         <div>
-            <button type='button' onClick={handleUpload}>
+            <button type='button' onClick={handleUpload} className="btn-save">
                 Save to Gallery
             </button>
             <CloudinaryContext cloudName='dall-e-dazzle' />

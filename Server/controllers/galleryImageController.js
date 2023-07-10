@@ -49,9 +49,6 @@ const createGalleryImage = async (req, res) => {
   }
 }
 
-// const uploadImage = async (req, res) => {
-  
-// }
 
 // WORKING:
 const deleteGalleryImage = async (req, res) => {
