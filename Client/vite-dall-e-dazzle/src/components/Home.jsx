@@ -5,10 +5,9 @@ const Home = () => {
   const { user } = useContext(UserContext)
 
   return (
-    <div className="home">
-     
+  
+      <div className="landing-page-img">
         <img
-          style={{ display: "block", maxWidth: "100%" }}
           src="https://petapixel.com/assets/uploads/2023/03/image5-1536x809.jpg"
           alt="logo"
         />

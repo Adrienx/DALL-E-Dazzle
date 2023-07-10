@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
-const galleryImageSchema = require('./galleryImage')
 
-const GalleryImage = mongoose.model('GalleryImage', galleryImageSchema)
+const Prompt = require("./Prompt")
 
-module.exports = {
-    GalleryImage
-}
+const PromptCategory = require("./PromptCategory")
+
+const GalleryImage = require('./galleryImage')
+
+module.exports = { Prompt, PromptCategory, GalleryImage }
+
