@@ -6,7 +6,6 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3001
 const AppRouter = require("./routes/AppRouter.js")
 const { Configuration, OpenAIApi } = require("openai")
-// const cloudinary = const mongoose = require("mongoose")
 require('cloudinary').v2
 
 ///////////////////////////////////////////////////////////////////
@@ -15,20 +14,6 @@ require('cloudinary').v2
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
 
 db.on("error", console.error.bind(console, "MongoDB connection error:"))
-
-///////////////////////////////////////////////////////////////////
-
-// Cloudinary config setup
-// cloudinary.config({
-//   cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
-//   apiKey: process.env.VITE_CLOUDINARY_API_KEY,
-//   apiSecret: process.env.VITE_CLOUDINARY_API_SECRET,
-//   url: {
-//     secure: true
-//   }
-// })
-// 
-const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
 
 ///////////////////////////////////////////////////////////////////
 
