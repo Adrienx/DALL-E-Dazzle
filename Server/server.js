@@ -6,7 +6,8 @@ const cors = require("cors")
 const PORT = process.env.PORT || 3001
 const AppRouter = require("./routes/AppRouter.js")
 const { Configuration, OpenAIApi } = require("openai")
-// const cloudinary = require('cloudinary').v2
+// const cloudinary = const mongoose = require("mongoose")
+require('cloudinary').v2
 
 ///////////////////////////////////////////////////////////////////
 //Server Set up
@@ -26,7 +27,8 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 //     secure: true
 //   }
 // })
-// const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
+// 
+const uploadEndpoint = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
 
 ///////////////////////////////////////////////////////////////////
 
@@ -35,6 +37,13 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
+app.use(express.json())
+
+const User = require("./models/User.js")
+const routes = require("./routes/User.js") 
+
+app.use("/api", routes)
+
 
 ///////////////////////////////////////////////////////////////////
 // Routes
@@ -52,15 +61,15 @@ app.get("/", (req, res) => {
 app.get("/api/generateImage", async (req, res) => {
   const prompt = req.query.prompt
 
-  //create a configuration variable that takes API key from .env
+  
   const configuration = new Configuration({
     apiKey: process.env.VITE_Open_AI_Key,
   })
 
-  // pass the configuration instance to the OpenAIApi
-  const openai = new OpenAIApi(configuration)
+  
+  const openai = new OpenAIApi(configuration);
 
-  //call creatImage api. n = number of images to return.
+  
   const result = await openai.createImage({
     prompt: prompt,
     n: 1,
@@ -77,6 +86,29 @@ app.get("/api/generateImage", async (req, res) => {
       error: "Failed to generate image",
     })
   }
+})
+
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body
+
+  try {
+    // Find the user by username and password
+    const user = await User.findOne({ username, password })
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid username or password" })
+    }
+
+    res.json({ message: "Login successful" })
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred" })
+  }
+})
+
+app.post("/api/logout", (req, res) => {
+  // Perform any necessary logout logic
+
+  res.json({ message: "Logout successful" })
 })
 
 ///////////////////////////////////////////////////////////////////
