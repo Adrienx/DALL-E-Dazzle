@@ -13,7 +13,6 @@ const Header = () => {
   return (
     <div className="header">
       <h1>DALL-E-Dazzle</h1>
-      <h2>Welcome, {user.username}!</h2>
       <Nav />
       {user.username && (
         <div>
