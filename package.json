@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "@cloudinary/react": "^1.11.2",
+    "@cloudinary/url-gen": "^1.10.1",
     "axios": "^1.4.0",
     "cloudinary": "^1.37.3",
+    "cloudinary-react": "^1.8.1",
     "deepai": "^1.0.21",
     "react-copy-to-clipboard": "^5.1.0",
     "react-hook-form": "^7.45.1"

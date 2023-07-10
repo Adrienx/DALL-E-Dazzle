@@ -12,7 +12,7 @@
   justify-content: space-between;
   padding: 20px;
   font-size: 2rem;
-  font-family: 'Agdasima', sans-serif;
+  font-family: "Agdasima", sans-serif;
 }
 .landing-page-img {
   display: flex;
@@ -37,7 +37,7 @@ nav ul li:not(:last-child)::after {
 .header h1 {
   color: #df7d7d;
   font-size: 3rem;
-  font-family: 'Agdasima', sans-serif;
+  font-family: "Agdasima", sans-serif;
 }
 
 nav ul {
@@ -84,11 +84,11 @@ nav ul li a:hover {
   background-color: #0056b3;
 }
 
-.btn-save {
-  background-color: #DCDADA;
+/* .btn-save {
+  background-color: #dcdada;
   color: #000000;
   margin: 0.5em 0;
-}
+} */
 
 .main-card {
   display: flex;
@@ -143,7 +143,7 @@ nav ul li a:hover {
 
 .modal-content-container {
   display: flex;
-  background-color: #DCDADA;
+  background-color: #dcdada;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
