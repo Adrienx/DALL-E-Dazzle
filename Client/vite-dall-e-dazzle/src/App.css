@@ -143,7 +143,7 @@ nav ul li a:hover {
 
 .modal-content-container {
   display: flex;
-  background-color: #dcdada;
+  background-color: #717171;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -169,6 +169,7 @@ nav ul li a:hover {
   background: #ffffff;
   border-radius: 5px;
   width: 100%;
+  color: #000000;
 }
 
 .modal-form button {

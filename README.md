@@ -47,8 +47,13 @@ App
 │ ├── UserSettings
 │ ├── ChangeEmail
 │ └── ChangePassword
-├── ImageCreator
+├── CreateImage
 │ └── CreatePrompt
+│ └── DeleteCategory
+│ └── DeletePrompt
+│ └── ImageUploader
+│ └── SearchPrompt
+│ └── UpdatePrompt
 ├── ImageGallery
 │ ├── FavoriteImages
 │ └── BrowseImages
